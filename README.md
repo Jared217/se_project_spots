@@ -1,21 +1,30 @@
-# Project 3: Spots
+# TripleTen Sprint 3 Project: Spots
 
-### Overview  
+### Overview
 
-* Intro  
-* Figma  
-* Images  
-  
+- Intro
+- Tech
+- Deployment
+- Video
+
 **Intro**
-  
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
-  
-**Figma**  
-  
-* [Link to the project on Figma](https://www.figma.com/file/BBNm2bC3lj8QQMHlnqRsga/Sprint-3-Project-%E2%80%94-Spots?type=design&node-id=2%3A60&mode=design&t=afgNFybdorZO6cQo-1)
-  
-**Images**  
-  
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-  
-Good luck and have fun!
+
+This project, as part of TripleTen's Sprint 3, I designed a user page for a photo sharing application. It has a user profile section where a user could introduce themself, as well as a content section displaying the user's photos along with captions. The photos also contain a "like" button for other users to show that the content is agreeable.
+
+**Tech**
+
+- HTML
+- CSS
+- BEM methodology and file structure
+- Responsive Design through @media quieries
+- Layout understanding from Figma Design
+- Repository tracking through GitHub
+- Deployment via GitHub pages
+
+**Deployment**
+
+- [Link to live webpage](https://jared217.github.io/se_project_spots/) hosted on GitHub pages
+
+**Video**
+
+- A link to a video demonstrating the project, tools used, functionality, and decision points will be added to this README after 1 or 2 submission iterations.

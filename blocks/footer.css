@@ -10,3 +10,7 @@
   opacity: 70%;
   font-family: "Poppins", Arial, Helvetica, sans-serif;
 }
+
+.footer__copyright {
+  margin: 0;
+}
