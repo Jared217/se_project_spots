@@ -1,5 +1,5 @@
 .card {
-  width: 413px;
+  max-width: 413px;
   font-family: "Poppins", Arial, sans-serif;
   color: #212121;
 }
@@ -45,8 +45,9 @@
 
 @media screen and (max-width: 630px) {
   .card {
-    width: 288px;
+    max-width: 288px;
     margin: auto;
+    width: 100%;
   }
 
   .card__image {

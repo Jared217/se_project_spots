@@ -23,8 +23,8 @@ This project, as part of TripleTen's Sprint 3, I designed a user page for a phot
 
 **Deployment**
 
-- [Link to live webpage](https://jared217.github.io/se_project_spots/) hosted on GitHub pages
+- [Link to live webpage](https://jared217.github.io/se_project_spots/) hosted on GitHub pages.
 
 **Video**
 
-- A link to a video demonstrating the project, tools used, functionality, and decision points will be added to this README after 1 or 2 submission iterations.
+- [Link to video](https://1drv.ms/v/c/556d482c9df12e0f/ETFANMAIDNNLhwq7fK12Y7ABX75JGlcl-1-api1FfiYW3w?e=9SdHa3) on OneDrive.
