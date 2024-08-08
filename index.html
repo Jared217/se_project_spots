@@ -115,9 +115,13 @@
       <footer class="footer page__section">
         <p class="footer__copyright">2023 &copy; Spots</p>
       </footer>
-      <div class="modal modal__opened">
+      <div class="modal" id="edit-profile-modal">
         <div class="modal__container">
-          <button type="submit" class="modal__close-btn"></button>
+          <button
+            type="submit"
+            class="modal__close-btn"
+            id="modal-close-button"
+          ></button>
           <h2 class="modal__title">Edit Profile</h2>
           <form name="edit-profile" class="modal__form">
             <label for="name" class="modal__label">
