@@ -25,18 +25,45 @@ const initialCards = [
   },
 ];
 
+// Contant Variables from within the Page
 const profileEditButton = document.querySelector(".profile__edit-button");
-const editProfileModal = document.querySelector("#edit-profile-modal");
-const modalCloseButton = editProfileModal.querySelector("#modal-close-button");
+const profileName = document.querySelector(".profile__name");
+const profileDescription = document.querySelector(".profile__description");
 
-function openModal() {
+// Constant Variables from within the Edit Profile Modal
+const editProfileModal = document.querySelector("#edit-profile-modal");
+const editProfileFormElement = editProfileModal.querySelector(".modal__form");
+const editProfileCloseButton = editProfileModal.querySelector(
+  ".modal__close-button"
+);
+const editModalNameInput = editProfileModal.querySelector(
+  "#profile-name-input"
+);
+const editModalDescriptionInput = editProfileModal.querySelector(
+  "#profile-description-input"
+);
+
+// Opens the Edit Profile Modal
+function openEditProfileModal() {
+  editModalNameInput.value = profileName.textContent;
+  editModalDescriptionInput.value = profileDescription.textContent.trim();
   editProfileModal.classList.add("modal__opened");
 }
 
-function closeModal() {
+// Closes the Edit Profile Modal without User Form Inputs
+function closeEditProfileModal() {
   editProfileModal.classList.remove("modal__opened");
 }
 
-profileEditButton.addEventListener("click", openModal);
+// Submits Edit Profile Form with User Form Inputs
+function handleEditProfileFormSubmit(evt) {
+  evt.preventDefault();
+  profileName.textContent = editModalNameInput.value;
+  profileDescription.textContent = editModalDescriptionInput.value;
+  closeEditProfileModal();
+}
 
-modalCloseButton.addEventListener("click", closeModal);
+// Events
+profileEditButton.addEventListener("click", openEditProfileModal);
+editProfileCloseButton.addEventListener("click", closeEditProfileModal);
+editProfileFormElement.addEventListener("submit", handleEditProfileFormSubmit);
