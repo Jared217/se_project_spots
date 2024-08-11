@@ -73,12 +73,12 @@ for (let i = 0; i < initialCards.length; i++) {
 function openEditProfileModal() {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent.trim();
-  editProfileModal.classList.add("modal__opened");
+  editProfileModal.classList.add("modal_opened");
 }
 
 // Closes the Edit Profile Modal without User Form Inputs
 function closeEditProfileModal() {
-  editProfileModal.classList.remove("modal__opened");
+  editProfileModal.classList.remove("modal_opened");
 }
 
 // Submits Edit Profile Form with User Form Inputs
