@@ -105,7 +105,7 @@
     padding: 12px;
   }
 
-  .modal__close-btn {
+  .modal__close-button {
     top: 12px;
     right: 12px;
   }
@@ -124,7 +124,7 @@
     padding: 12px 16px;
   }
 
-  .modal__submit-btn {
+  .modal__submit-button {
     width: 100%;
   }
 }
