@@ -2,6 +2,7 @@
   max-width: 413px;
   font-family: "Poppins", Arial, sans-serif;
   color: #212121;
+  position: relative;
 }
 
 .card__image {
@@ -41,6 +42,31 @@
 
 .card__like-button:hover {
   opacity: 1;
+}
+
+.card__like-button_liked {
+  background: transparent url(../images/hearted.svg) no-repeat center/cover;
+  opacity: 1;
+}
+
+.card__like-button_liked:hover {
+  background-image: url(../images/hearted-hover.svg);
+}
+
+.card__delete-button {
+  background: transparent url(../images/delete.png) no-repeat center/cover;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.card__delete-button:hover {
+  background: transparent url(../images/delete-hover.png) no-repeat center/cover;
 }
 
 @media screen and (max-width: 630px) {
