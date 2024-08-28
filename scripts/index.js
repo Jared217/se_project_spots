@@ -31,9 +31,22 @@ const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const newPostButton = document.querySelector(".profile__add-button");
 
+// All Modals
+const closeButtons = document.querySelectorAll(".modal__close-button");
+
 // Edit Profile Modal
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const editProfileForm = editProfileModal.querySelector(".modal__form");
+/*
+Although the form could be accessed via document.forms(form-name), and this approach would be suitable in this particular
+project, I believe that in a scalable project, limiting a secondary query to the scope of the previous search results
+yields a more efficient approach.
+Using document.forms in a large-scale project would initiate a document-wide search for matching values,
+whereas using specificModal.querySelector confines the search and requires less processing.
+This was my though process when implementing suggested changes and I certainly could be wrong.
+I would be happy to receive further feedback about the two approaches.
+*/
+
 const editProfileCloseButton = editProfileModal.querySelector(
   ".modal__close-button"
 );
@@ -50,6 +63,16 @@ const newPostModalCloseButton = newPostModal.querySelector(
   ".modal__close-button"
 );
 const newPostForm = newPostModal.querySelector(".modal__form");
+/*
+Although the form could be accessed via document.forms(form-name), and this approach would be suitable in this particular
+project, I believe that in a scalable project, limiting a secondary query to the scope of the previous search results
+yields a more efficient approach.
+Using document.forms in a large-scale project would initiate a document-wide search for matching values,
+whereas using specificModal.querySelector confines the search and requires less processing.
+This was my though process when implementing suggested changes and I certainly could be wrong.
+I would be happy to receive further feedback about the two approaches.
+*/
+
 const newPostLinkInput = newPostModal.querySelector("#image-link-input");
 const newPostCaptionInput = newPostModal.querySelector("#caption-input");
 
@@ -94,18 +117,18 @@ function getCardElement(data) {
     previewModalCaption.textContent = data.name;
   });
 
-  previewCloseButton.addEventListener("click", () => {
-    closeModal(previewModal);
-  });
-
   return cardElement;
 }
 
-// Iterates over Initial Card array retrieving data to create element, and adds HTML element to page
+// Iterates over Initial Card array and uses renderCard function to add each card to the end of the page
 initialCards.forEach((item) => {
-  const cardElement = getCardElement(item);
-  cardsList.append(cardElement);
+  renderCard(item, "append");
 });
+
+function renderCard(item, method = "prepend") {
+  const cardElement = getCardElement(item);
+  cardsList[method](cardElement);
+}
 
 // Opens the Modal
 function openModal(modal) {
@@ -132,8 +155,8 @@ function handleNewPostSubmit(evt) {
     name: newPostCaptionInput.value,
     link: newPostLinkInput.value,
   };
-  const newCard = getCardElement(inputValues);
-  cardsList.prepend(newCard);
+  renderCard(inputValues);
+  evt.target.reset();
   closeModal(newPostModal);
 }
 
@@ -144,18 +167,16 @@ profileEditButton.addEventListener("click", () => {
   openModal(editProfileModal);
 });
 
-editProfileCloseButton.addEventListener("click", () => {
-  closeModal(editProfileModal);
-});
-
 editProfileForm.addEventListener("submit", handleEditProfileSubmit);
 
 newPostButton.addEventListener("click", () => {
   openModal(newPostModal);
 });
 
-newPostModalCloseButton.addEventListener("click", () => {
-  closeModal(newPostModal);
-});
-
 newPostForm.addEventListener("submit", handleNewPostSubmit);
+
+// Iterates over all modal close buttons to create a universal event handler for closing modals
+closeButtons.forEach((button) => {
+  const popup = button.closest(".modal");
+  button.addEventListener("click", () => closeModal(popup));
+});
