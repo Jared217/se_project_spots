@@ -33,22 +33,16 @@ const newPostButton = document.querySelector(".profile__add-button");
 
 // All Modals
 const closeButtons = document.querySelectorAll(".modal__close-button");
+const overlays = document.querySelectorAll(".modal");
 
 // Edit Profile Modal
 const editProfileModal = document.querySelector("#edit-profile-modal");
-const editProfileForm = editProfileModal.querySelector(".modal__form");
-/*
-Although the form could be accessed via document.forms(form-name), and this approach would be suitable in this particular
-project, I believe that in a scalable project, limiting a secondary query to the scope of the previous search results
-yields a more efficient approach.
-Using document.forms in a large-scale project would initiate a document-wide search for matching values,
-whereas using specificModal.querySelector confines the search and requires less processing.
-This was my though process when implementing suggested changes and I certainly could be wrong.
-I would be happy to receive further feedback about the two approaches.
-*/
-
+const editProfileForm = document.forms["edit-profile"];
 const editProfileCloseButton = editProfileModal.querySelector(
   ".modal__close-button"
+);
+const editProfileSubmitButton = editProfileModal.querySelector(
+  ".modal__submit-button"
 );
 const editModalNameInput = editProfileModal.querySelector(
   "#profile-name-input"
@@ -62,19 +56,10 @@ const newPostModal = document.querySelector("#new-post-modal");
 const newPostModalCloseButton = newPostModal.querySelector(
   ".modal__close-button"
 );
-const newPostForm = newPostModal.querySelector(".modal__form");
-/*
-Although the form could be accessed via document.forms(form-name), and this approach would be suitable in this particular
-project, I believe that in a scalable project, limiting a secondary query to the scope of the previous search results
-yields a more efficient approach.
-Using document.forms in a large-scale project would initiate a document-wide search for matching values,
-whereas using specificModal.querySelector confines the search and requires less processing.
-This was my though process when implementing suggested changes and I certainly could be wrong.
-I would be happy to receive further feedback about the two approaches.
-*/
-
+const newPostForm = document.forms["new-post"];
 const newPostLinkInput = newPostModal.querySelector("#image-link-input");
 const newPostCaptionInput = newPostModal.querySelector("#caption-input");
+const newPostSubmitButton = newPostModal.querySelector(".modal__submit-button");
 
 // Preview Modal
 const previewModal = document.querySelector("#preview-modal");
@@ -120,6 +105,15 @@ function getCardElement(data) {
   return cardElement;
 }
 
+// Iterate over the modals to add click event outside of the content
+overlays.forEach((modal) => {
+  modal.addEventListener("click", (evt) => {
+    if (evt.target === modal && modal.classList.contains("modal_opened")) {
+      closeModal(modal);
+    }
+  });
+});
+
 // Iterates over Initial Card array and uses renderCard function to add each card to the end of the page
 initialCards.forEach((item) => {
   renderCard(item, "append");
@@ -130,14 +124,26 @@ function renderCard(item, method = "prepend") {
   cardsList[method](cardElement);
 }
 
-// Opens the Modal
+// Opens the Modal and adds key listener
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscapeKey);
 }
 
-// Closes the Modal without User Form Inputs
+// Closes the Modal without User Form Inputs and removes key listener
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscapeKey);
+}
+
+// Handle Escape Key Closing of Modal
+function handleEscapeKey(evt) {
+  if (evt.key === "Escape") {
+    const currentModal = document.querySelector(".modal_opened");
+    if (currentModal) {
+      closeModal(currentModal);
+    }
+  }
 }
 
 // Submits Edit Profile Form with User Form Inputs
@@ -145,6 +151,7 @@ function handleEditProfileSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = editModalNameInput.value;
   profileDescription.textContent = editModalDescriptionInput.value;
+  disableButton(editProfileSubmitButton, settings);
   closeModal(editProfileModal);
 }
 
@@ -157,6 +164,7 @@ function handleNewPostSubmit(evt) {
   };
   renderCard(inputValues);
   evt.target.reset();
+  disableButton(newPostSubmitButton, settings);
   closeModal(newPostModal);
 }
 
@@ -164,6 +172,11 @@ function handleNewPostSubmit(evt) {
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent.trim();
+  resetValidation(
+    editProfileForm,
+    [editModalNameInput, editModalDescriptionInput],
+    settings
+  );
   openModal(editProfileModal);
 });
 

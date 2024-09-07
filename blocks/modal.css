@@ -129,6 +129,21 @@
   color: #212121;
 }
 
+.modal__input_type_error {
+  border: 1px solid #ff000099;
+}
+
+.modal__error {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.1;
+  color: #ff0000b3;
+}
+
+.modal__error_inactive {
+  display: none;
+}
+
 .modal__submit-button {
   width: 156px;
   padding: 18px 0;
@@ -139,10 +154,11 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 1;
+  cursor: pointer;
 }
 
-.modal__submit-button {
-  cursor: pointer;
+.modal__submit-button_disabled {
+  opacity: 0.5;
 }
 
 @media screen and (max-width: 630px) {
