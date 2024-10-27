@@ -1,27 +1,43 @@
+import "./index.css";
+
+import {
+  enableValidation,
+  resetValidation,
+  disableButton,
+  settings,
+} from "../scripts/validation.js";
+
+const trainingImage = new URL("../images/training.jpg", import.meta.url);
+const wesleyImage = new URL("../images/wesley.jpg", import.meta.url);
+const deskviewImage = new URL("../images/deskview.JPG", import.meta.url);
+const motorcycleImage = new URL("../images/flyin.jpg", import.meta.url);
+const jumpingDogImage = new URL("../images/annie.jpg", import.meta.url);
+const firstBuildImage = new URL("../images/machine.JPG", import.meta.url);
+
 const initialCards = [
   {
     name: "Training with the boys",
-    link: "./images/training.jpg",
+    link: trainingImage,
   },
   {
     name: "Best Bud",
-    link: "./images/wesley.jpg",
+    link: wesleyImage,
   },
   {
     name: "Newest Passion",
-    link: "./images/deskview.JPG",
+    link: deskviewImage,
   },
   {
     name: "Living in the fast lane",
-    link: "./images/flyin.jpg",
+    link: motorcycleImage,
   },
   {
     name: "Life requires a leap of courage",
-    link: "./images/annie.jpg",
+    link: jumpingDogImage,
   },
   {
     name: "My first build",
-    link: "./images/machine.JPG",
+    link: firstBuildImage,
   },
 ];
 
@@ -193,3 +209,5 @@ closeButtons.forEach((button) => {
   const popup = button.closest(".modal");
   button.addEventListener("click", () => closeModal(popup));
 });
+
+enableValidation(settings);
