@@ -8,7 +8,7 @@ import {
 } from "../scripts/validation.js";
 
 import Api from "../utils/Api.js";
-import { handlePendingChange } from "../utils/helpers.js";
+import { handlePendingChange, handleSubmit } from "../utils/utils.js";
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -145,18 +145,12 @@ function renderCard(item, method = "prepend") {
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscapeKey);
-  if (modal === deleteModal) {
-    deleteCancelButton.addEventListener("click", handleDeleteCancel);
-  }
 }
 
 // Closes the Modal without User Form Inputs and removes key listener
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscapeKey);
-  if (modal == deleteModal) {
-    deleteCancelButton.removeEventListener("click", handleDeleteCancel);
-  }
 }
 
 // Handle Escape Key Closing of Modal
@@ -171,18 +165,13 @@ function handleEscapeKey(evt) {
 
 // Handle Card Deletion
 function handleDeleteSubmit(evt) {
-  evt.preventDefault();
-  handlePendingChange(evt, true);
-  api
-    .deleteCard(selectedCardId)
-    .then(() => {
+  function makeRequest() {
+    return api.deleteCard(selectedCardId).then(() => {
       selectedCard.remove();
       closeModal(deleteModal);
-    })
-    .catch(console.error)
-    .finally(() => {
-      handlePendingChange(evt, false);
     });
+  }
+  handleSubmit(makeRequest, evt, "Deleting...");
 }
 
 function handleDeleteCard(cardElement, cardId) {
@@ -191,69 +180,53 @@ function handleDeleteCard(cardElement, cardId) {
   openModal(deleteModal);
 }
 
-function handleDeleteCancel(evt) {
-  evt.preventDefault();
-  deleteModal.classList.remove("modal_opened");
-}
-
 // Submits Edit Profile Form with User Form Inputs
 function handleEditProfileSubmit(evt) {
-  evt.preventDefault();
-  handlePendingChange(evt, true);
-  api
-    .editUserInfo({
-      name: editModalNameInput.value,
-      about: editModalDescriptionInput.value,
-    })
-    .then((data) => {
-      profileName.textContent = data.name;
-      profileDescription.textContent = data.about;
-      disableButton(editProfileSubmitButton, settings);
-      closeModal(editProfileModal);
-    })
-    .catch(console.error)
-    .finally(() => {
-      handlePendingChange(evt, false);
-    });
+  function makeRequest() {
+    return api
+      .editUserInfo({
+        name: editModalNameInput.value,
+        about: editModalDescriptionInput.value,
+      })
+      .then((data) => {
+        profileName.textContent = data.name;
+        profileDescription.textContent = data.about;
+        disableButton(editProfileSubmitButton, settings);
+        closeModal(editProfileModal);
+      });
+  }
+  handleSubmit(makeRequest, evt);
 }
 
 // Submit New Avatar
 function handleEditAvatarSubmit(evt) {
-  evt.preventDefault();
-  handlePendingChange(evt, true);
-  api
-    .editUserAvatar(editAvatarLinkInput.value)
-    .then((data) => {
+  function makeRequest() {
+    return api.editUserAvatar(editAvatarLinkInput.value).then((data) => {
       profileAvatar.src = data.avatar;
       disableButton(editAvatarSubmitButton, settings);
       closeModal(editAvatarModal);
-    })
-    .catch(console.error)
-    .finally(() => {
-      handlePendingChange(evt, false);
     });
+  }
+  handleSubmit(makeRequest, evt);
 }
 
 // Submit New Post Form
 function handleNewPostSubmit(evt) {
-  evt.preventDefault();
-  handlePendingChange(evt, true);
-  api
-    .postNewCard({
-      name: newPostCaptionInput.value,
-      link: newPostLinkInput.value,
-    })
-    .then((data) => {
-      const inputValues = { name: data.name, link: data.link, _id: data._id };
-      renderCard(inputValues);
-      evt.target.reset();
-      disableButton(newPostSubmitButton, settings);
-      closeModal(newPostModal);
-    })
-    .catch(console.error)
-    .finally(() => {
-      handlePendingChange(evt, false);
-    });
+  function makeRequest() {
+    return api
+      .postNewCard({
+        name: newPostCaptionInput.value,
+        link: newPostLinkInput.value,
+      })
+      .then((data) => {
+        const inputValues = { name: data.name, link: data.link, _id: data._id };
+        renderCard(inputValues);
+        evt.target.reset();
+        disableButton(newPostSubmitButton, settings);
+        closeModal(newPostModal);
+      });
+  }
+  handleSubmit(makeRequest, evt);
 }
 
 // Handle toggle of Card Like button
@@ -278,6 +251,8 @@ profileEditButton.addEventListener("click", () => {
   );
   openModal(editProfileModal);
 });
+
+deleteCancelButton.addEventListener("click", () => closeModal(deleteModal));
 
 editProfileForm.addEventListener("submit", handleEditProfileSubmit);
 
