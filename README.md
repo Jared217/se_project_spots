@@ -8,7 +8,7 @@
 
 **Intro**
 
-This project, as part of TripleTen's Software Engineering Bootcamp, I designed a user page for a photo sharing application. It has a user profile section where a user could introduce themself, as well as a content section displaying the user's photos along with captions. The photos also contain a "like" button for other users to show that the content is agreeable. With most recent developments the site can, with some limitations, store user data, retrieve posted images/content, and retain post "liked" status.
+This project, as part of TripleTen's Software Engineering Bootcamp, I designed a user page for a photo sharing application. It has a user profile section where a user could introduce themself, as well as a content section displaying the user's photos along with captions. The photos also contain a "like" button for other users to show that the content is agreeable. With most recent developments the site can, with some limitations, store user data, retrieve posted images/content, and retain post "liked" status. While it does demonstrate basic Asynchronous JavaScript and working with API's, it does not yet support multi-user interfacing. This is something I may look to add in the future.
 
 **Tech**
 
