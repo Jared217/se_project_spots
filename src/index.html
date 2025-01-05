@@ -26,16 +26,23 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/profile.jpg')%>"
-            alt="Jared Ware"
-            class="profile__avatar"
-          />
+          <div class="profile__avatar-container">
+            <button class="profile__avatar-button">
+              <img
+                class="profile__pencil-icon"
+                src="<%=require('./images/pencil-light.svg')%>"
+                alt="edit icon"
+              />
+            </button>
+            <img
+              src="<%=require('./images/profile.jpg')%>"
+              alt="Jared Ware"
+              class="profile__avatar"
+            />
+          </div>
           <div class="profile__column">
-            <h1 class="profile__name">Jared Ware</h1>
-            <p class="profile__description">
-              Aspiring Software Engineer and part-time YouTube content creator
-            </p>
+            <h1 class="profile__name"></h1>
+            <p class="profile__description"></p>
             <button type="button" class="profile__edit-button">
               <img
                 src="<%=require('./images/pencil.svg')%>"
@@ -165,6 +172,61 @@
         </div>
       </div>
       <!--End Pop up Preview Modal-->
+      <!--Edit Avatar Modal-->
+      <div class="modal" id="edit-avatar-modal">
+        <div class="modal__container">
+          <button type="submit" class="modal__close-button"></button>
+          <h2 class="modal__title">Edit Profile Avatar</h2>
+          <form name="edit-avatar" class="modal__form" novalidate>
+            <label for="profile-avatar-input" class="modal__label">
+              Profile Picture
+              <input
+                id="profile-avatar-input"
+                name="avatar"
+                type="url"
+                class="modal__input"
+                placeholder="Paste the link to an image"
+                required
+              />
+              <span
+                id="profile-avatar-input-error"
+                class="modal__error modal__error_inactive"
+              ></span>
+            </label>
+            <button type="submit" class="modal__submit-button">Save</button>
+          </form>
+        </div>
+      </div>
+      <!--End Edit Avatar Modal-->
+      <!--Delete Post Modal-->
+      <div class="modal" id="delete-modal">
+        <div class="modal__container modal__container_type_delete">
+          <button
+            type="submit"
+            class="modal__close-button modal__close-button_type_preview"
+          ></button>
+          <h2 class="modal__title modal__title_type_delete">
+            Are you sure you want to delete this image?
+          </h2>
+          <form name="delete-form" class="modal__form" novalidate>
+            <div class="modal__actions_type_delete">
+              <button
+                type="submit"
+                class="modal__submit-button modal__submit-button_type_delete"
+              >
+                Delete
+              </button>
+              <button
+                type="button"
+                class="modal__submit-button modal__submit-button_type_cancel"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--End Delete Post Modal-->
     </div>
   </body>
 </html>

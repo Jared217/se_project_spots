@@ -48,6 +48,12 @@
   height: fit-content;
 }
 
+.modal__container_type_delete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .modal__image {
   width: 100%;
   object-fit: contain;
@@ -73,7 +79,7 @@
     center/cover;
   opacity: 1;
   top: 0;
-  right: -52.5px;
+  right: -52px;
 }
 
 .modal__close-button:hover {
@@ -98,6 +104,18 @@
   font-size: 32px;
   font-weight: 500;
   line-height: 1;
+}
+
+.modal__title_type_delete {
+  font-size: 24px;
+  margin: 0;
+  padding: 0 0 32px;
+  text-align: center;
+}
+
+.modal__actions_type_delete {
+  display: flex;
+  gap: 20px;
 }
 
 .modal__label {
@@ -155,6 +173,27 @@
   font-weight: 500;
   line-height: 1;
   cursor: pointer;
+}
+
+.modal__submit-button_type_delete {
+  background: #ff6565;
+}
+
+.modal__submit-button_type_delete:hover {
+  background: #ff3333;
+  color: #212121;
+}
+
+.modal__submit-button_type_cancel {
+  border: solid 1px;
+  color: #212121;
+  background: #fff;
+}
+
+.modal__submit-button_type_cancel:hover {
+  border: none;
+  background: #212121;
+  color: #fff;
 }
 
 .modal__submit-button_disabled {
